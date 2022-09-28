@@ -3,6 +3,7 @@ package com.example.userdata.userdataapi.entity;
 import javax.persistence.*;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 
 @Entity
@@ -19,11 +20,12 @@ public class User {
 
     @Column(name="eMail")
     @NotEmpty(message = "This Field cannot be empty...")
-    @Email(message = "Correct Email is needed...")
+    @Email(regexp = "^(.+)@(.+)$", message = "Invalid email pattern")
     private String email;
     @Column(name="Mobile")
     @NotEmpty(message = "This Field cannot be empty...")
-    @Size(max = 10)
+    @Pattern(regexp = "[7-9][0-9]{9}", message = "invalid mobile number.")
+    @Size(max = 10, message = "digits should be 10")
     private String mobile;
 
     public User(){

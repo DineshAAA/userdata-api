@@ -39,8 +39,7 @@
                              id="name"
                              placeholder="User Name "
                              name="name"
-                             th:field="*{name}"
-                             required> <br/>
+                             th:field="*{name}"> <br/>
 
                         <div th:if="${#fields.hasErrors('name')}" th:errors="*{name}"
                              class="alert alert-danger"></div>
@@ -53,8 +52,7 @@
                            id="email"
                            placeholder="User Email "
                            name="email"
-                               th:field="*{email}"
-                               required > <br/>
+                               th:field="*{email}"> <br/>
 
                         <div th:if="${#fields.hasErrors('email')}" th:errors="*{email}"
                            class="alert alert-danger"></div>
@@ -67,9 +65,7 @@
                                id="mobile"
                                placeholder="User Mobile"
                                name="mobile"
-                               th:field="*{mobile}"
-                               required autofocus size="10"
-                               pattern="[0-9]{10}" > <br/>
+                               th:field="*{mobile}"> <br/>
 
                         <div th:if="${#fields.hasErrors('mobile')}" th:errors="*{mobile}"
                              class="alert alert-danger"></div>

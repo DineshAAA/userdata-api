@@ -43,37 +43,50 @@ public class UserController implements WebMvcConfigurer {
     }
 
     @PostMapping("/users")
-    public String saveUser(@ModelAttribute("user") User user){
+    public String saveUser(@Valid User user, Errors errors, Model model){
+    if (errors.hasErrors()){
+        return "create_user";
+    }else{
+        model.addAttribute(user);
         userService.saveUser(user);
         return "redirect:/users";
     }
 
-
-/*
-    @GetMapping("/user/new")
-    public String createUserForm( Model model){
-            User user = new User();
-            model.addAttribute("user",user);
-            return "create_user";
     }
 
-
-
-    @PostMapping("/users")
-    public String saveUser( @Valid @ModelAttribute("user")  BindingResult error ) {
-        User user = new User();
-        if(error.hasErrors()){
-            return "create_user";
-        }
-        else{
+    /*
+        @PostMapping("/users")
+        public String saveUser(@ModelAttribute("user") User user){
             userService.saveUser(user);
             return "redirect:/users";
         }
 
-    }
 
 
- */
+        @GetMapping("/user/new")
+        public String createUserForm( Model model){
+                User user = new User();
+                model.addAttribute("user",user);
+                return "create_user";
+        }
+
+
+
+        @PostMapping("/users")
+        public String saveUser( @Valid @ModelAttribute("user")  BindingResult error ) {
+            User user = new User();
+            if(error.hasErrors()){
+                return "create_user";
+            }
+            else{
+                userService.saveUser(user);
+                return "redirect:/users";
+            }
+
+        }
+
+
+     */
     @GetMapping("/users/edit/{id}")
     public String editUserForm(@PathVariable Integer id,Model model){
         model.addAttribute("user",userService.getUserById(id));
