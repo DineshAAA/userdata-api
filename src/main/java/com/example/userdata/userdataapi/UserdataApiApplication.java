@@ -9,5 +9,16 @@ public class UserdataApiApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(UserdataApiApplication.class, args);
 	}
+/*
+	@Bean
+	public PasswordEncoder passwordEncoder() {
+		return NoOpPasswordEncoder.getInstance();
+	}
+
+
+
+
+ */
+
 
 }

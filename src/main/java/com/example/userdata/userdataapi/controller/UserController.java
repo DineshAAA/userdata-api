@@ -5,16 +5,20 @@ import com.example.userdata.userdataapi.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 import javax.persistence.criteria.CriteriaBuilder;
+import javax.validation.Valid;
 
 
 @Controller
-public class UserController {
+public class UserController implements WebMvcConfigurer {
 
     public UserController(UserService userService) {
         this.userService = userService;
@@ -25,9 +29,11 @@ public class UserController {
 
     @GetMapping("/users")
     public String listUsers(Model model){
+
         model.addAttribute("user",userService.getAllUsers());
         return "users";
     }
+
 
     @GetMapping("/user/new")
     public String createUserForm(Model model){
@@ -42,6 +48,32 @@ public class UserController {
         return "redirect:/users";
     }
 
+
+/*
+    @GetMapping("/user/new")
+    public String createUserForm( Model model){
+            User user = new User();
+            model.addAttribute("user",user);
+            return "create_user";
+    }
+
+
+
+    @PostMapping("/users")
+    public String saveUser( @Valid @ModelAttribute("user")  BindingResult error ) {
+        User user = new User();
+        if(error.hasErrors()){
+            return "create_user";
+        }
+        else{
+            userService.saveUser(user);
+            return "redirect:/users";
+        }
+
+    }
+
+
+ */
     @GetMapping("/users/edit/{id}")
     public String editUserForm(@PathVariable Integer id,Model model){
         model.addAttribute("user",userService.getUserById(id));

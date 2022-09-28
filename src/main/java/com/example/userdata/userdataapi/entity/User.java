@@ -1,17 +1,29 @@
 package com.example.userdata.userdataapi.entity;
+
 import javax.persistence.*;
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.Size;
 
 @Entity
 public class User {
 
 @Id
+@Column(name="ID")
 @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
-@Column(name="Name",nullable = false)
+    @Column(name="Name")
+    @NotEmpty(message = "This Field cannot be empty...")
+    @Size(min=2, max=30)
     private String name;
-    @Column(name="eMail",nullable = false)
+
+    @Column(name="eMail")
+    @NotEmpty(message = "This Field cannot be empty...")
+    @Email(message = "Correct Email is needed...")
     private String email;
     @Column(name="Mobile")
+    @NotEmpty(message = "This Field cannot be empty...")
+    @Size(max = 10)
     private String mobile;
 
     public User(){
